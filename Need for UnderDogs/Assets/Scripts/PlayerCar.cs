@@ -7,65 +7,39 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCar : Car
 {
-    List<Transform> wayPoints = new List<Transform>();
+    Transform startPoint;
+    Transform finishPoint;
+
     NavMeshAgent agent;
-    [SerializeField] Transform finish;
-    int wayPointIndex = 0;
-    Vector3 destinationPos;
-    Transform nextWayPoint;
-    float timeCount = 0f;
 
     protected override void Start()
     {
         base.Start();
-        AddWayPoints();
         agent = GetComponent<NavMeshAgent>();
+        SetNavMeshProperties(); 
+        GetStartFinishPoint();
+        agent.SetDestination(finishPoint.position);
+    }
+
+    // Set the navmesh agent properties
+    private void SetNavMeshProperties()
+    {
         agent.autoTraverseOffMeshLink = false;
-        //GoToNextWayPoint();
-        agent.SetDestination(finish.position);
+        agent.speed = 0f;
+        agent.acceleration = 0f;
+        agent.angularSpeed = 200f;
     }
 
-    private void AddWayPoints()
+    // Get start and finish point
+    private void GetStartFinishPoint()
     {
-        Transform wayPointTransform = GameObject.FindGameObjectWithTag("Track").transform.GetChild(1).transform;
-        foreach (Transform wayPoint in wayPointTransform)
-        {
-            wayPoints.Add(wayPoint);
-        }
-    }
-
-    private void GoToNextWayPoint()
-    {
-        // If no waypoints have been set up
-        if (wayPoints.Count == 0) { return; }
-
-        // Choose the next point in the array as the destination, else fix to final waypoint
-        if (wayPointIndex < wayPoints.Count)
-        {
-            destinationPos = wayPoints[wayPointIndex].position;
-            // Set the agent to go to the current selected destination
-            //Vector3.MoveTowards(transform.position, destinationPos, 0f);
-            agent.SetDestination(destinationPos);
-            //transform.LookAt(destinationPos);
-            wayPointIndex++;
-        }
-        else
-        {
-            wayPointIndex = wayPoints.Count - 1;
-        }
+        startPoint = GameObject.FindGameObjectWithTag("StartingPoint").transform;
+        finishPoint = GameObject.FindGameObjectWithTag("FinishPoint").transform;
     }
 
     private void Update()
     {
         ProcessInput();
-        //transform.LookAt(destinationPos);
-        //UpdateRotation();
-    }
-
-    private void UpdateRotation()
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, nextWayPoint.rotation, Mathf.Clamp(timeCount, 0f,1f));
-        timeCount += Time.deltaTime;
     }
 
     protected override void ProcessInput()
@@ -76,13 +50,13 @@ public class PlayerCar : Car
             agent.speed = _currentSpeed;
             agent.acceleration = _currentSpeed * 2f;
             agent.autoBraking = false;
+            agent.isStopped = false;
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            agent.speed = 0f;
-            agent.acceleration = 0f;
-            _rb.velocity = Vector3.zero;
+            _currentSpeed = 0f;
             agent.autoBraking = true;
+            agent.isStopped = true;
         }
 
         if (_currentSpeed > maxSpeed)
@@ -90,16 +64,4 @@ public class PlayerCar : Car
             _currentSpeed = maxSpeed;
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "WayPoint")
-    //    {
-    //        nextWayPoint = wayPoints[wayPointIndex + 1];
-    //        _rb.AddForce(-30f * _rb.velocity);
-    //        timeCount = 0f;
-    //        GoToNextWayPoint();
-    //        return;
-    //    }
-    //}
 }
