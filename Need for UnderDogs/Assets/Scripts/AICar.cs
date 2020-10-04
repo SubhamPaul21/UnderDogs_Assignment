@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class AICar : Car
 {
     [SerializeField] Transform[] wayPoints;
+    [SerializeField] Transform finish;
 
     NavMeshAgent agent;
     int wayPointIndex = 0;
@@ -16,7 +17,8 @@ public class AICar : Car
         agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = false;
         agent.autoBraking = false;
-        GoToNextWayPoint();
+        //GoToNextWayPoint();
+        agent.SetDestination(finish.position);
     }
 
     private void GoToNextWayPoint()
@@ -41,12 +43,12 @@ public class AICar : Car
 
     private void Update()
     {
-        ProcessInput();
+        //ProcessInput();
     }
 
     protected override void ProcessInput()
     {
-        _currentSpeed += acceleration * Time.deltaTime;
+        _currentSpeed += speed * Time.deltaTime;
         _rb.velocity += transform.forward * _currentSpeed;
         //else if (Input.GetMouseButtonUp(0))
         //{
@@ -59,12 +61,12 @@ public class AICar : Car
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "WayPoint")
-        {
-            GoToNextWayPoint();
-            return;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "WayPoint")
+    //    {
+    //        GoToNextWayPoint();
+    //        return;
+    //    }
+    //}
 }

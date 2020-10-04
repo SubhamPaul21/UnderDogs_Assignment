@@ -7,8 +7,8 @@ public abstract class Car : MonoBehaviour
     [Header("Car properties")]
     //state variables
     protected float brakeFactor = 15f;
-    protected float acceleration = 1f;
-    protected float maxSpeed = 1f;
+    protected float speed = 10f;
+    protected float maxSpeed = 20f;
 
     // member variables
     protected Rigidbody _rb;

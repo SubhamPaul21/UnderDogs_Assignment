@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 2
     agentHeight: 2
     agentSlope: 0
     agentClimb: 0
@@ -114,13 +114,32 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.6666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 4eb1df08b4b16c74ab2e3e3c3349037c, type: 2}
+--- !u!1 &387270024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 174880, guid: f6f35ee947f49f046b66897b4a6ae8a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1305804455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &387270025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387270024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0572f9c57ad4ba4b8710b175892910d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finish: {fileID: 1517978255}
 --- !u!54 &387270028 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 5474872, guid: f6f35ee947f49f046b66897b4a6ae8a8,
@@ -457,13 +476,52 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_Acceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_Radius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350412545, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1792482372, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f6f35ee947f49f046b66897b4a6ae8a8, type: 3}
 --- !u!4 &1305804456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 474874, guid: f6f35ee947f49f046b66897b4a6ae8a8,
     type: 3}
   m_PrefabInstance: {fileID: 1305804455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1517978255 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1735165278, guid: 22e23113e0d5d62458ab999bb2ff2c9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1024466258}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1552316027
 GameObject:

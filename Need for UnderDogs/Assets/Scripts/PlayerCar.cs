@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerCar : Car
 {
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
+    [SerializeField] Transform finish;
     int wayPointIndex = 0;
     Vector3 destinationPos;
+    Transform nextWayPoint;
+    float timeCount = 0f;
 
     protected override void Start()
     {
@@ -16,7 +21,8 @@ public class PlayerCar : Car
         AddWayPoints();
         agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = false;
-        GoToNextWayPoint();
+        //GoToNextWayPoint();
+        agent.SetDestination(finish.position);
     }
 
     private void AddWayPoints()
@@ -40,7 +46,7 @@ public class PlayerCar : Car
             // Set the agent to go to the current selected destination
             //Vector3.MoveTowards(transform.position, destinationPos, 0f);
             agent.SetDestination(destinationPos);
-            transform.LookAt(destinationPos);
+            //transform.LookAt(destinationPos);
             wayPointIndex++;
         }
         else
@@ -53,18 +59,30 @@ public class PlayerCar : Car
     {
         ProcessInput();
         //transform.LookAt(destinationPos);
+        //UpdateRotation();
+    }
+
+    private void UpdateRotation()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation, nextWayPoint.rotation, Mathf.Clamp(timeCount, 0f,1f));
+        timeCount += Time.deltaTime;
     }
 
     protected override void ProcessInput()
     {
         if (Input.GetMouseButton(0))
         {
-            _currentSpeed += acceleration * Time.deltaTime;
-            _rb.velocity += transform.forward * _currentSpeed;
+            _currentSpeed += speed * Time.deltaTime;
+            agent.speed = _currentSpeed;
+            agent.acceleration = _currentSpeed * 2f;
+            agent.autoBraking = false;
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            _rb.AddForce(-brakeFactor * _rb.velocity);
+            agent.speed = 0f;
+            agent.acceleration = 0f;
+            _rb.velocity = Vector3.zero;
+            agent.autoBraking = true;
         }
 
         if (_currentSpeed > maxSpeed)
@@ -73,13 +91,15 @@ public class PlayerCar : Car
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "WayPoint")
-        {
-            _rb.AddForce(-30f * _rb.velocity);
-            GoToNextWayPoint();
-            return;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "WayPoint")
+    //    {
+    //        nextWayPoint = wayPoints[wayPointIndex + 1];
+    //        _rb.AddForce(-30f * _rb.velocity);
+    //        timeCount = 0f;
+    //        GoToNextWayPoint();
+    //        return;
+    //    }
+    //}
 }
