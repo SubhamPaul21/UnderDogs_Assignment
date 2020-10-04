@@ -6,9 +6,9 @@ public abstract class Car : MonoBehaviour
 {
     [Header("Car properties")]
     //state variables
-    [SerializeField] protected float brakeFactor = 15f;
-    [SerializeField] protected float acceleration = 1f;
-    [SerializeField] protected float maxSpeed = 10f;
+    protected float brakeFactor = 15f;
+    protected float acceleration = 1f;
+    protected float maxSpeed = 1f;
 
     // member variables
     protected Rigidbody _rb;

@@ -406,11 +406,11 @@ GameObject:
   - component: {fileID: 474874}
   - component: {fileID: 5474872}
   - component: {fileID: 1350412543}
-  - component: {fileID: 1350412544}
   - component: {fileID: 1350412545}
+  - component: {fileID: 1792482372}
   m_Layer: 0
   m_Name: Sportscar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,9 +461,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.7128801, y: 1.3180647, z: 3.5622282}
-  m_Center: {x: 0.23078656, y: 0.66963434, z: 0.0234949}
---- !u!114 &1350412544
+  m_Size: {x: 1.4920243, y: 1.3180647, z: 3.5622282}
+  m_Center: {x: 0.02034074, y: 0.66963434, z: 0.023494959}
+--- !u!195 &1350412545
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174880}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 3
+  m_Speed: 1
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1792482372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -475,29 +497,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0572f9c57ad4ba4b8710b175892910d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brakeFactor: 15
-  acceleration: 1
-  maxSpeed: 10
-  endPos: {fileID: 0}
---- !u!195 &1350412545
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174880}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 0
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.37
-  m_BaseOffset: 0.1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
