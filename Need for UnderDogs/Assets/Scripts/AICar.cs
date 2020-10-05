@@ -31,17 +31,13 @@ public class AICar : Car
     private void Update()
     {
         ProcessInput();
-        //print("Remaining Distance: " + GetPathRemainingDistance(agent));
+        print(name + " : " + GetPathRemainingDistance(agent));
     }
 
     protected override void ProcessInput()
     {
         // Check raycast information
         RaycastHit info;
-
-        //Debug.DrawW(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z), transform.forward * 13f, Color.red, 1f);
-
-        //Physics.BoxCast(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z), transform.lossyScale / 2, transform.forward, out info, Quaternion.identity, 13f);
 
         if (Physics.BoxCast(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z), transform.localScale * 2f, transform.forward, out info, Quaternion.identity, 13f))
         {
@@ -51,16 +47,6 @@ public class AICar : Car
                 Stop();
             }
         }
-        //if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z), transform.forward, out info, 13f))
-        //{
-        //    Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z) + transform.forward * info.distance, transform.lossyScale);
-
-        //    if (info.transform.CompareTag("Wall"))
-        //    {
-        //        print("Stopping");
-        //        Stop();
-        //    }
-        //}
         else
         {
             Move();
@@ -113,7 +99,7 @@ public class AICar : Car
         agent.SetDestination(finishPoint.position);
     }
 
-    private float GetPathRemainingDistance(NavMeshAgent navMeshAgent)
+    public float GetPathRemainingDistance(NavMeshAgent navMeshAgent)
     {
         if (navMeshAgent.pathPending ||
             navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid ||

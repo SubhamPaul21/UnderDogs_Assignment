@@ -18,7 +18,7 @@ public class HurdleSpawner : MonoBehaviour
     // Fetch all the track transforms
     void FetchTracks()
     {
-        foreach (Transform track in GameObject.FindGameObjectWithTag("Track").transform.GetChild(0).transform)
+        foreach (Transform track in transform.parent.transform.GetChild(0).transform)
         {
             tracks.Add(track);
         }
