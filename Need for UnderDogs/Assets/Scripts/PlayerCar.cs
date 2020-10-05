@@ -38,6 +38,7 @@ public class PlayerCar : Car
     private void Update()
     {
         ProcessInput();
+        print("Remaining Distance: " + GetPathRemainingDistance(agent));
     }
 
     protected override void ProcessInput()
@@ -81,7 +82,7 @@ public class PlayerCar : Car
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            CollidedWithWall();
+            //CollidedWithWall();
         }
     }
 
@@ -96,5 +97,21 @@ public class PlayerCar : Car
         agent.updateRotation = false;
         transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         agent.SetDestination(finishPoint.position);
+    }
+
+    private float GetPathRemainingDistance(NavMeshAgent navMeshAgent)
+    {
+        if (navMeshAgent.pathPending ||
+            navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid ||
+            navMeshAgent.path.corners.Length == 0)
+            return -1f;
+
+        float distance = 0.0f;
+        for (int i = 0; i < navMeshAgent.path.corners.Length - 1; ++i)
+        {
+            distance += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
+        }
+
+        return distance;
     }
 }
