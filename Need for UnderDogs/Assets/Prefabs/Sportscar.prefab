@@ -461,8 +461,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4920243, y: 1.3180647, z: 3.5622282}
-  m_Center: {x: 0.02034074, y: 0.66963434, z: 0.023494959}
+  m_Size: {x: 1.4920243, y: 1.0282948, z: 3.5622282}
+  m_Center: {x: 0.02034074, y: 0.8145193, z: 0.023494959}
 --- !u!195 &1350412545
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -497,4 +497,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0572f9c57ad4ba4b8710b175892910d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finish: {fileID: 0}

@@ -7,6 +7,7 @@ TagManager:
   - Track
   - StartingPoint
   - FinishPoint
+  - Wall
   layers:
   - Default
   - TransparentFX
