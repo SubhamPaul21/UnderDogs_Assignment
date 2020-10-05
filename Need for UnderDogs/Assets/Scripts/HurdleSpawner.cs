@@ -38,7 +38,7 @@ public class HurdleSpawner : MonoBehaviour
         List<int> randomIndexList = new List<int>();
         int randomIndex;
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 1; i <= 10; i++)
         {
             do
             {

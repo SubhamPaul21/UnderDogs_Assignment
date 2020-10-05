@@ -2,13 +2,12 @@
 
 public class CameraFollow : MonoBehaviour
 {
-
 	[SerializeField] Transform target;
+	[SerializeField] Rigidbody parentRigidbody;
 	[SerializeField] float distance = 20.0f;
 	[SerializeField] float height = 5.0f;
 	[SerializeField] float heightDamping = 2.0f;
 	[SerializeField] float lookAtHeight = 0.0f;
-	[SerializeField] Rigidbody parentRigidbody;
 	[SerializeField] float rotationSnapTime = 0.3F;
 	[SerializeField] float distanceSnapTime;
 	[SerializeField] float distanceMultiplier;

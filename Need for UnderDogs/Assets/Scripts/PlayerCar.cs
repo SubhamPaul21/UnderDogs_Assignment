@@ -5,8 +5,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCar : Car
 {
-    Transform startPoint;
-    Transform finishPoint;
+    [SerializeField] Transform startPoint;
+    [SerializeField] Transform finishPoint;
 
     NavMeshAgent agent;
 
@@ -24,14 +24,6 @@ public class PlayerCar : Car
         agent.speed = 0f;
         agent.acceleration = 0f;
         agent.angularSpeed = 200f;
-        GetStartFinishPoint();
-    }
-
-    // Get start and finish point
-    private void GetStartFinishPoint()
-    {
-        startPoint = GameObject.FindGameObjectWithTag("StartingPoint").transform;
-        finishPoint = GameObject.FindGameObjectWithTag("FinishPoint").transform;
         agent.SetDestination(finishPoint.position);
     }
 
@@ -43,6 +35,7 @@ public class PlayerCar : Car
 
     protected override void ProcessInput()
     {
+        
         if (Input.GetMouseButton(0))
         {
             Move();
