@@ -30,13 +30,12 @@ public class PlayerCar : Car
     private void Update()
     {
         ProcessInput();
-        print(name + " : " + GetPathRemainingDistance(agent));
     }
 
     protected override void ProcessInput()
     {
         
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && GameHandler.Instance.IsGameReady)
         {
             Move();
         }
@@ -92,19 +91,19 @@ public class PlayerCar : Car
         agent.SetDestination(finishPoint.position);
     }
 
-    public float GetPathRemainingDistance(NavMeshAgent navMeshAgent)
+    public float GetPathRemainingDistance()
     {
-        if (navMeshAgent.pathPending ||
-            navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid ||
-            navMeshAgent.path.corners.Length == 0)
+        if (agent.pathPending ||
+            agent.pathStatus == NavMeshPathStatus.PathInvalid ||
+            agent.path.corners.Length == 0)
             return -1f;
 
         float distance = 0.0f;
-        for (int i = 0; i < navMeshAgent.path.corners.Length - 1; ++i)
+        for (int i = 0; i < agent.path.corners.Length - 1; ++i)
         {
-            distance += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
+            distance += Vector3.Distance(agent.path.corners[i], agent.path.corners[i + 1]);
         }
 
-        return distance;
+        return distance + Random.Range(0.001f, 0.1f);
     }
 }

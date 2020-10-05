@@ -13,7 +13,7 @@ public class WallOscillator : MonoBehaviour
     void Start()
     {
         startingPos = transform.position;
-        period = Random.Range(3.7f, 5f);
+        period = Random.Range(4f, 5f);
         SetOscillation();
     }
 
