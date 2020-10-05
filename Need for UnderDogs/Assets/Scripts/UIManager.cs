@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-
     void Update()
     {
         UpdateLeaderBoard();

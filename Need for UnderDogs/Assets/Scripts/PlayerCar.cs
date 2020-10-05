@@ -74,7 +74,7 @@ public class PlayerCar : Car
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            CollidedWithWall();
+            //CollidedWithWall();
         }
     }
 

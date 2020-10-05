@@ -50,9 +50,9 @@ public class GameHandler : MonoBehaviour
         subhamRemainingDistance = cars[0].GetComponent<PlayerCar>().GetPathRemainingDistance();
         print("subhamRemainingDistance: " + subhamRemainingDistance);
         godSpeedRemainingDistance = cars[1].GetComponent<AICar>().GetPathRemainingDistance();
-        print("godSpeedRemainingDistance: " + godSpeedRemainingDistance);
+        //print("godSpeedRemainingDistance: " + godSpeedRemainingDistance);
         pikachuRemainingDistance = cars[2].GetComponent<AICar>().GetPathRemainingDistance();
-        print("pikachuRemainingDistance: " + pikachuRemainingDistance);
+        //print("pikachuRemainingDistance: " + pikachuRemainingDistance);
         CalculateLeaderBoard();
     }
 
