@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
@@ -7,6 +6,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
+
+
+    [SerializeField] GameObject wonUI;
+    [SerializeField] GameObject lostUI;
 
     [SerializeField] Text firstPosition;
     [SerializeField] Text secondPosition;
@@ -27,13 +30,24 @@ public class UIManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
+    private void Start()
+    {
+        wonUI.SetActive(false);
+        lostUI.SetActive(false);
+    }
+
     void Update()
     {
-        UpdateLeaderBoard();
+        // Start leaderboard update after game is ready
+        if (GameHandler.Instance.IsGameReady)
+        {
+            UpdateLeaderBoard();
+            CheckGameStat();
+        }
+        
     }
 
     private void UpdateLeaderBoard()
@@ -61,5 +75,32 @@ public class UIManager : MonoBehaviour
         if (leaderBoardDict.ElementAt(2).Key.name == "Subham") { subhamRank.sprite = rankSprites[0]; }
         if (leaderBoardDict.ElementAt(2).Key.name == "GodSpeed") { godSpeedRank.sprite = rankSprites[0]; }
         if (leaderBoardDict.ElementAt(2).Key.name == "Pikachu") { pikachuRank.sprite = rankSprites[0]; }
+    }
+
+    // check if player has won or lost
+    private void CheckGameStat()
+    {
+        if (GameHandler.Instance.HasPlayerWon == "yes")
+        {
+            WinUI();
+        }
+        else if (GameHandler.Instance.HasPlayerWon == "no")
+        {
+            GameOverUI();
+        }
+    }
+
+    // enable lost ui when other cars reached destination before player
+    private void GameOverUI()
+    {
+        Time.timeScale = 0f;
+        lostUI.SetActive(true);
+    }
+
+    // enable win ui when player reached destination before other cars
+    private void WinUI()
+    {
+        Time.timeScale = 0f;
+        wonUI.SetActive(true);
     }
 }

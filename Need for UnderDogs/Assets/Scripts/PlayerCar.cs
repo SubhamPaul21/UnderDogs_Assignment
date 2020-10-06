@@ -8,7 +8,10 @@ public class PlayerCar : Car
     [SerializeField] Transform startPoint;
     [SerializeField] Transform finishPoint;
 
+    public bool HasPlayerReachedEnd { get; private set; } = false;
+
     NavMeshAgent agent;
+
 
     protected override void Start()
     {
@@ -34,7 +37,7 @@ public class PlayerCar : Car
 
     protected override void ProcessInput()
     {
-        
+#if UNITY_EDITOR 
         if (Input.GetMouseButton(0) && GameHandler.Instance.IsGameReady)
         {
             Move();
@@ -43,7 +46,21 @@ public class PlayerCar : Car
         {
             Stop();
         }
+#elif UNITY_ANDROID
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
+            if (touch.phase == TouchPhase.Stationary && GameHandler.Instance.IsGameReady)
+            {
+                Move();
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                Stop();
+            }
+        }
+#endif
         if (_currentSpeed > maxSpeed)
         {
             _currentSpeed = maxSpeed;
@@ -74,7 +91,15 @@ public class PlayerCar : Car
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            //CollidedWithWall();
+            CollidedWithWall();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FinishPoint"))
+        {
+            HasPlayerReachedEnd = true;
         }
     }
 
